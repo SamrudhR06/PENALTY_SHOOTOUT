@@ -1,49 +1,60 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main()
 {
-    int player_corner;
-    int keeper_corner;
+    int playerCorner;
+    int keeperCorner;
     int score = 0;
     int i;
 
-    srand(time(0));
+    srand(time(NULL));
 
-    printf("----- Penalty Shootout -----\n");
+    printf("===== PENALTY SHOOTOUT =====\n");
 
     for (i = 1; i <= 5; i++)
     {
-        printf("\nEnter the corner at which you want to shoot (1-4): ");
-        scanf("%d", &player_corner);
+        printf("\nPenalty %d\n", i);
 
-        keeper_corner = rand() % 4 + 1;
-
-        printf("You shot at corner %d\n", player_corner);
-        printf("Keeper dived at corner %d\n", keeper_corner);
-
-        if (player_corner == keeper_corner)
+        do
         {
-            printf("Save!\n");
+            printf("Choose a corner (1-4): ");
+            scanf("%d", &playerCorner);
+
+            if (playerCorner < 1 || playerCorner > 4)
+            {
+                printf("Invalid input! Please choose a corner between 1 and 4.\n");
+            }
+
+        } while (playerCorner < 1 || playerCorner > 4);
+
+        keeperCorner = rand() % 4 + 1;
+
+        printf("You shot at corner %d\n", playerCorner);
+        printf("Keeper dived at corner %d\n", keeperCorner);
+
+        if (playerCorner == keeperCorner)
+        {
+            printf("SAVE!!\n");
         }
         else
         {
-            printf("Goal!\n");
+            printf("GOAL!!\n");
             score++;
         }
     }
 
-    printf("\n----- Final Whistle! -----\n");
-    printf("Total goals scored: %d\n", score);
+    printf("\n===== MATCH OVER =====\n");
+    printf("Total goals scored: %d/5\n", score);
 
     if (score >= 3)
     {
-        printf("\nMatch won!!\n");
+        printf("You Win!!\n");
     }
     else
     {
-        printf("\nGoalkeeper saved the day! Match lost.\n");
+        printf("Keeper saved the day. You Lose!\n");
     }
 
     return 0;
