@@ -8,6 +8,7 @@ int main()
     int keeperCorner;
     int score = 0;
     int i;
+    int result;
 
     srand(time(NULL));
 
@@ -19,15 +20,18 @@ int main()
 
         do
         {
-            printf("Choose a corner (1-4): ");
-            scanf("%d", &playerCorner);
-
-            if (playerCorner < 1 || playerCorner > 4)
+            printf("\nChoose a corner (1-4): ");
+            result = scanf("%d", &playerCorner);
+            if(result != 1){
+                printf("\n Invalid Input entered ,Please enter a number (1-4):");
+                while(getchar()!='\n');
+            }
+            if (result==1 && (playerCorner < 1 || playerCorner > 4))
             {
                 printf("Invalid input! Please choose a corner between 1 and 4.\n");
             }
 
-        } while (playerCorner < 1 || playerCorner > 4);
+        } while (result!=1 || (playerCorner < 1 || playerCorner > 4));
 
         keeperCorner = rand() % 4 + 1;
 
